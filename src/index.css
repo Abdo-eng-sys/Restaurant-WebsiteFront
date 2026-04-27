@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Local Font Face Declarations */
+@font-face {
+  font-family: 'PremierLeague';
+  src: url('./assests/fonts/English/PremierLeague-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PremierLeague';
+  src: url("./assests/fonts/English/PremierLeague-Bold.ttf") format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PremierLeague';
+  src: url('./assests/fonts/English/PremierLeague-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VIP-Arabic';
+  src: url('./assests/fonts/Arabic/VIP-Arabic.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-gray-50 text-gray-900;
+  }
+
+  /* English language - use PremierLeague */
+  html:lang(en) {
+    font-family: 'PremierLeague', system-ui, sans-serif;
+  }
+
+  /* Arabic language - use VIP-Arabic */
+  html:lang(ar) {
+    font-family: 'VIP-Arabic', system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-medium hover:bg-primary-600 hover:text-white transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12 py-16 md:py-24;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-gold-500 bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
