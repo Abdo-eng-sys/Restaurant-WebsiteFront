@@ -1,11 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-<<<<<<< HEAD
   baseURL: process.env.REACT_APP_API_URL || "https://restaurant-websiteback-production.up.railway.app/",
-=======
-  baseURL: process.env.REACT_APP_API_URL || 'https://royalrest.up.railway.app',
->>>>>>> 160fb83eac8245f36f15c675e2b6d44f8f850c01
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
