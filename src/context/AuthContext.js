@@ -3,6 +3,9 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
+// Change from VITE_API_URL to REACT_APP_API_URL to match your Netlify setting
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://restaurant-websiteback-production.up.railway.app';
+
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
@@ -21,7 +24,8 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get('/api/user');
+      // Directs request to Railway backend
+      const response = await axios.get(`${API_BASE_URL}/api/user`);
       setUser(response.data);
     } catch (error) {
       localStorage.removeItem('token');
@@ -32,18 +36,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const response = await axios.post('/api/login', { email, password });
+    const response = await axios.post(`${API_BASE_URL}/api/login`, { email, password });
     const { token, user } = response.data;
     localStorage.setItem('token', token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setUser(user);
-    console.log(user);
-
     return user;
   };
 
   const register = async (name, email, password, password_confirmation) => {
-    const response = await axios.post('/api/register', {
+    // Uses absolute URL to prevent Netlify 404 error
+    const response = await axios.post(`${API_BASE_URL}/api/register`, {
       name,
       email,
       password,
@@ -58,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('/api/logout');
+      await axios.post(`${API_BASE_URL}/api/logout`);
     } catch (error) {
       console.error('Logout error:', error);
     }
@@ -68,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateProfile = async (profileData) => {
-    const response = await axios.put('/api/user/profile', profileData);
+    const response = await axios.put(`${API_BASE_URL}/api/user/profile`, profileData);
     setUser(response.data.user);
     return response.data.user;
   };
