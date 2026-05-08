@@ -5,6 +5,10 @@ import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
 import toast from 'react-hot-toast';
 
+// 1. Define your Railway Backend URL here
+// Make sure this matches your Railway production URL exactly
+const BACKEND_URL = "https://restaurant-websiteback-production.up.railway.app";
+
 const MenuItemCard = ({ item, index }) => {
   const { addToCart } = useCart();
   const { t, language } = useLanguage();
@@ -12,6 +16,17 @@ const MenuItemCard = ({ item, index }) => {
   const handleAddToCart = () => {
     addToCart(item);
     toast.success(language === 'ar' ? `تمت إضافة ${item.name} إلى السلة!` : `${item.name} added to cart!`);
+  };
+
+  // 2. Helper to format the image URL
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return `https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop`;
+
+    // If the image path is already a full URL, use it
+    if (imagePath.startsWith('http')) return imagePath;
+
+    // Otherwise, point to the Railway backend storage folder
+    return `${BACKEND_URL}/storage/${imagePath}`;
   };
 
   return (
@@ -23,7 +38,8 @@ const MenuItemCard = ({ item, index }) => {
     >
       <div className="relative overflow-hidden">
         <img
-          src={item.image_url || `https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop`}
+          // 3. Use the helper function here
+          src={getImageUrl(item.image_url)}
           alt={item.name}
           className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
         />
