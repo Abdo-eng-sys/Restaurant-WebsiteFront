@@ -8,6 +8,9 @@ import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
+// Define the absolute URL to bridge the gap between Netlify and Railway
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://restaurant-websiteback-production.up.railway.app';
+
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice } = useCart();
   const { user } = useAuth();
@@ -26,7 +29,8 @@ const Cart = () => {
         notes: "Please deliver as soon as possible."
       };
 
-      const response = await axios.post('/api/orders', orderData);
+      // UPDATED: Prepend API_BASE_URL to fix the 404 error seen in image_0e0d71.jpg
+      const response = await axios.post(`${API_BASE_URL}/api/orders`, orderData);
 
       if (response.status === 201) {
         toast.success(language === 'ar' ? 'تم تقديم الطلب بنجاح!' : response.data.message);
