@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://royalrest.up.railway.app',
+  baseURL: process.env.REACT_APP_API_URL || "https://restaurant-websiteback-production.up.railway.app/",
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -31,3 +31,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+// https://localhost:8000/ to run it local 
