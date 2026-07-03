@@ -4,7 +4,7 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 // Change from VITE_API_URL to REACT_APP_API_URL to match your Netlify setting
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://restaurant-websiteback-production.up.railway.app';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://web-production-0d124.up.railway.app';
 
 export const useAuth = () => useContext(AuthContext);
 

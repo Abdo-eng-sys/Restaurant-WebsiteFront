@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 // 1. Define your Railway Backend URL here
 // Make sure this matches your Railway production URL exactly
-const BACKEND_URL = "https://restaurant-websiteback-production.up.railway.app";
+const BACKEND_URL = "https://web-production-0d124.up.railway.app";
 
 const MenuItemCard = ({ item, index }) => {
   const { addToCart } = useCart();

@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 
 // Define the absolute URL to bridge the gap between Netlify and Railway
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://restaurant-websiteback-production.up.railway.app';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://web-production-0d124.up.railway.app';
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice } = useCart();
